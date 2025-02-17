@@ -10,6 +10,13 @@ jobs:
     name: create release artifacts
     runs-on: ubuntu-latest
     steps:
+      - name: Start Measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: start-measurement
+          api-endpoint-add: "http://34.57.100.155:3000/environmental_data"
+          json-output: true
+          
       - name: Harden Runner
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
@@ -27,7 +34,13 @@ jobs:
         shell: bash
         run: |
           (cd $GITHUB_WORKSPACE/kubernetes && tar -czvf open-amt-toolkit-helm.tar.gz charts)
-
+          
+      - name: Build and Release Measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: get-measurement
+          label: 'Build and Release workflow'
+          
       - name: upload helm tarball release artifact
         uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # v2
         with:
@@ -37,3 +50,8 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           body: "Open AMT Cloud Toolkit Helm deployment tarball asset"
+          
+      - name: Show Energy Results
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        with:
+          task: display-results
