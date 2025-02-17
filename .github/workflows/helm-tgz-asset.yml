@@ -4,7 +4,7 @@ on:
       - "*"
 name: Build and release on push
 permissions:
-  contents: read
+  contents: write
 jobs:
   release:
     name: create release artifacts
@@ -44,7 +44,7 @@ jobs:
       - name: upload helm tarball release artifact
         uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           file: ${{ github.workspace}}/kubernetes/open-amt-toolkit-helm.tar.gz
           asset_name: open-amt-toolkit-helm.tar.gz
           tag: ${{ github.ref }}
