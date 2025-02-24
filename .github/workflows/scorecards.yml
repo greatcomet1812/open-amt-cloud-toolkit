@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Start Measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        uses: DaxLynch/eco-ci-energy-estimation@main
         with:
           task: start-measurement
           api-endpoint-add: "http://34.57.100.155:3000/environmental_data"
@@ -70,7 +70,7 @@ jobs:
           publish_results: true
 
       - name: Build Scorecard Measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        uses: DaxLynch/eco-ci-energy-estimation@main
         with:
           task: get-measurement
           label: 'Scorecard Security Analysis'
@@ -91,6 +91,6 @@ jobs:
           sarif_file: results.sarif
 
       - name: Show Energy Results
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        uses: DaxLynch/eco-ci-energy-estimation@main
         with:
           task: display-results

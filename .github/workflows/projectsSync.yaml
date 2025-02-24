@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Start Measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        uses: DaxLynch/eco-ci-energy-estimation@main
         with:
           task: start-measurement
           api-endpoint-add: "http://34.57.100.155:3000/environmental_data"
@@ -29,12 +29,12 @@ jobs:
           github-token: ${{ secrets.PROJECTS_PAT }}
 
       - name: Build Project Sync Measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        uses: DaxLynch/eco-ci-energy-estimation@main
         with:
           task: get-measurement
           label: 'Add Issue to Project'
 
       - name: Show Energy Results
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4
+        uses: DaxLynch/eco-ci-energy-estimation@main
         with:
           task: display-results
